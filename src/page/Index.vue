@@ -1,13 +1,12 @@
 <template>
   <div class="layout">
     <my-header />
-    <my-content class="content" />
+    <router-view></router-view>
   </div>
     
 </template>
 <script>
   import Header from '@/components/Header'
-  import Content from '@/components/Content'
   export default {
     name: 'Index',
     data () {
@@ -16,8 +15,7 @@
       }
     },
     components: {
-      'my-header': Header,
-      'my-content': Content
+      'my-header': Header
     }
   }
 </script>

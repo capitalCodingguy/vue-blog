@@ -4,27 +4,12 @@
       <Col span="16">
         <div class="layout-breadcrumb">
           <Breadcrumb>
+            <BreadcrumbItem href="">燕子梁筑</BreadcrumbItem>
             <BreadcrumbItem href="">博客</BreadcrumbItem>
-            <BreadcrumbItem href="current_id">{{current_article.title}}</BreadcrumbItem>
+            <BreadcrumbItem href="current_id">{{current_article.title}}java里的变量</BreadcrumbItem>
           </Breadcrumb>
         </div>
-        <div v-if="isArticleList">
-          <Row class="articleList" v-for="(post, key, index) in posts" v-bind:key="post.id">
-            <Col span="24">
-              <div v-on:click="goArticlePage">
-                <ArticleList v-bind:post="post" />
-              </div>
-            </Col>
-          </Row>
-          <Row class="articleList-page">
-            <Col span="24">
-              <Page :total="total" show-total v-on:on-change="pageChange"></Page>
-            </Col>
-          </Row>
-        </div>
-        <div v-if="!isArticleList">
-          <Article v-bind:articleId="current_id"></Article> 
-        </div>
+        <router-view></router-view>
       </Col>
       <Col span="7" style="margin-top: 40px;">
         <Card :bordered="false">
@@ -86,26 +71,18 @@
 </style>
 
 <script>
-  import ArticleList from '@/components/ArticleList';
-  import Article from '@/components/Article';
   export default {
     name: "Content",
     data: () => ({
       posts_url: 'http://blog.app/api/blog_list',
       categories_url: 'http://blog.app/api/categories',
       recommendedPosts_url: 'http://blog.app/api/recommendedPosts',
-      limit: 1,
-      total: 100,
-      posts: [],
       categories: [],
       recommendedPosts: [],
       current_id: 1,
-      current_article: '',
-      isArticleList: true
+      current_article: ''
     }),
     mounted: function () {
-      //请求博客列表
-      this.getBlogList();
       //热门文章列表
       this.getHotArticle();
       //请求文章分类列表
@@ -135,11 +112,10 @@
         });
       },
       goArticlePage: function(){
-        console.log(111);
-        this.isArticleList = !this.isArticleList;
+        
       }
     },
-    components: { "ArticleList": ArticleList, "Article": Article},
+    components: {},
   };
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -158,12 +134,6 @@
   }
   .ivu-breadcrumb {
     text-align: left;
-  }
-  .articleList{
-    margin-left: 20px;
-  }
-  .articleList-page {
-    margin-top: 20px;
   }
   .classify {
     height: 42px;

@@ -1,6 +1,6 @@
 <template>
   <div class="content">
-   <mavon-editor class="mavon-editor" :default_open="default_open" v-model="article" :subfield="false" :toolbarsFlag="false" :editable="false" :ishljs="true" @save="saveArticleData" @htmlcode="htmlcode" style="height: 100%;"></mavon-editor>
+   <mavon-editor class="mavon-editor" v-model:default_open="default_open" v-model="article" :subfield="false" :toolbarsFlag="false" :editable="false" :ishljs="true" @save="saveArticleData" @htmlcode="htmlcode" style="height: 100%;"></mavon-editor>
   </div>
 </template>
 <script>
@@ -9,11 +9,11 @@ import { mavonEditor } from 'mavon-editor'
 import 'mavon-editor/dist/css/index.css'
 export default {
   name: "Article",
-  props: ['articleId'],
   data: () => ({
     post_url: 'http://blog.app/api/blog/',
     default_open: 'preview',
     article: '',
+    articleId: ''
 
   }),
   mounted: function(){
@@ -27,8 +27,8 @@ export default {
   },
   methods: {
     getArticleData: function() {
-      this.axios.get(this.post_url + this.articleId).then((res) => {
-        console.log(res.data);
+      this.articleId = this.$route.params.articleId;
+      this.axios.get(this.post_url + this.$route.params.articleId).then((res) => {
         this.article = res.data.content;
       });
     },
@@ -46,6 +46,7 @@ export default {
 <style scoped>
   .content {
     max-width: 1200px;
+    min-height: 1000px;
     background-color: #fff;
     margin: 20px 0 0 20px;
   }
@@ -54,6 +55,6 @@ export default {
   }
   .mavon-editor.v-note-wrapper .v-note-panel{
     box-shadow: none;
-    padding-top: 0;
+    padding-top: 15px;
   }
 </style>
