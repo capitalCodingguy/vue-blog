@@ -10,7 +10,7 @@
     </Col>
     <Col span="3" class="article-title-col">
       <Icon type="ios-folder-outline" size="16px" />
-      <!-- <span style="margin-left: 5px;font-size: 14px;" v-cloak>{{article.category.name}}</span> -->
+      <span style="margin-left: 5px;font-size: 14px;" v-cloak>{{article.category.name}}</span>
     </Col>
     <Col span="2">
       <Icon type="ios-eye-outline" size="16px" />
