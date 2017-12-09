@@ -2,11 +2,13 @@
   <div class="layout">
     <my-header />
     <router-view></router-view>
+    <my-footer />
   </div>
     
 </template>
 <script>
   import Header from '@/components/Header'
+  import Footer from '@/components/Footer'
   export default {
     name: 'Index',
     data () {
@@ -15,7 +17,8 @@
       }
     },
     components: {
-      'my-header': Header
+      'my-header': Header,
+      'my-footer': Footer
     }
   }
 </script>

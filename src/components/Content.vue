@@ -5,8 +5,8 @@
         <div class="layout-breadcrumb">
           <Breadcrumb>
             <BreadcrumbItem href="">燕子梁筑</BreadcrumbItem>
-            <BreadcrumbItem href="">博客</BreadcrumbItem>
-            <BreadcrumbItem href="current_id">{{current_article.title}}java里的变量</BreadcrumbItem>
+            <BreadcrumbItem href="/blog/articlelist">博客</BreadcrumbItem>
+            <BreadcrumbItem href="">{{setArticle}}</BreadcrumbItem>
           </Breadcrumb>
         </div>
         <router-view></router-view>
@@ -74,13 +74,9 @@
   export default {
     name: "Content",
     data: () => ({
-      posts_url: 'http://blog.app/api/blog_list',
-      categories_url: 'http://blog.app/api/categories',
-      recommendedPosts_url: 'http://blog.app/api/recommendedPosts',
       categories: [],
       recommendedPosts: [],
-      current_id: 1,
-      current_article: ''
+      article: ''
     }),
     mounted: function () {
       //热门文章列表
@@ -89,44 +85,30 @@
       this.getArticleCategory();
     },
     methods: {
-      //页码变更函数
-      pageChange: function(event){
-        this.limit = event;
-        this.getBlogList();
-      },
-
-      getBlogList: function(){
-        this.axios.get(this.posts_url + '?page=' + this.limit).then((res) => {
-          this.total = res.data.total;
-          this.posts = res.data.data;
-        });
-      },
       getHotArticle: function(){
-        this.axios.get(this.recommendedPosts_url).then((res) => {
+        this.axios.get(this.web_api_url + 'recommendedPosts').then((res) => {
           this.recommendedPosts = res.data;
         });
       },
       getArticleCategory: function(){
-        this.axios.get(this.categories_url).then((res) => {
+        this.axios.get(this.web_api_url + 'categories').then((res) => {
           this.categories = res.data;
         });
-      },
-      goArticlePage: function(){
-        
+      }
+    },
+    computed: {
+      setArticle () {
+        return this.$store.state.article.title;
       }
     },
     components: {},
   };
 </script>
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   .content {
     max-width: 1200px;
     /* background-color: #fff; */
     margin: 80px auto 0;
-  }
-  .layout{
-    
   }
   .layout-breadcrumb{
     /* padding: 10px 0 0 20px; */

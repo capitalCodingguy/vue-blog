@@ -7,15 +7,15 @@
           <Row type="flex" justify="center">
             <Col span="4" class="article-title-col">
               <Icon type="ios-calendar-outline" size="14px" />
-              <span style="margin-left: 5px;">{{post.created_at | timeFormat}}</span>
+              <span style="margin-left: 5px;font-size: 12px;">{{post.created_at | timeFormat}}</span>
             </Col>
             <Col span="3" class="article-title-col">
               <Icon type="ios-folder-outline" size="14px" />
-              <span style="margin-left: 5px;">{{post.category.name}}</span>
+              <span style="margin-left: 5px;font-size: 12px;">{{post.category.name}}</span>
             </Col>
             <Col span="3">
               <Icon type="ios-eye-outline" size="14px" />
-              <span style="margin-left: 5px;">{{post.view_count}}</span>
+              <span style="margin-left: 5px;font-size: 12px;">{{post.view_count}}</span>
             </Col>
           </Row>
         </div>
@@ -38,7 +38,6 @@ export default {
   name: "ArticleList",
   props: ["post"],
   data: () => ({
-    posts_url: 'http://blog.app/api/blog_list',
     limit: 1,
     total: 100,
     posts: [],
@@ -50,7 +49,7 @@ export default {
       this.getBlogList();
     },
     getBlogList: function(){
-      this.axios.get(this.posts_url + '?page=' + this.limit).then((res) => {
+      this.axios.get(this.web_api_url + 'blog_list' + '?page=' + this.limit).then((res) => {
         this.total = res.data.total;
         this.posts = res.data.data;
       });
