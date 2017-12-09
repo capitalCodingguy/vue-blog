@@ -26,6 +26,9 @@
 <style scoped>
   .layout {
     width: 100%;
-    /* background-color: #fff; */
+    display: flex;
+    display: -webkit-flex;
+    min-height: 100vh;
+    flex-direction: column;
   }
 </style>

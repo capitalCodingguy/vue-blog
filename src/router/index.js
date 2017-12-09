@@ -2,7 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/page/Home'
 import Index from '@/page/Index'
-import Content from '@/components/Content'
+import BlogContent from '@/components/BlogContent'
+import WorksContent from '@/components/WorksContent'
 import ArticleList from '@/components/ArticleList'
 import Article from '@/components/Article'
 
@@ -19,10 +20,12 @@ export default new Router({
       path: '/',
       name: 'Blog',
       component: Index,
+      redirect: '/blog/',
       children: [
         {
           path: '/blog/',
-          component: Content,
+          component: BlogContent,
+          redirect: '/blog/articlelist/',
           children: [
             {
               name: 'articlelist',
@@ -35,6 +38,11 @@ export default new Router({
               component: Article,
             }
           ]
+        },
+        {
+          name: 'works',
+          path: '/works/',
+          component: WorksContent,
         }
       ]
     }

@@ -8,9 +8,9 @@
       <Icon type="ios-calendar-outline" size="16px" />
       <span style="margin-left: 5px;font-size: 14px;;">{{article.created_at | timeFormat}}</span>
     </Col>
-    <Col span="2" class="article-title-col">
+    <Col span="3" class="article-title-col">
       <Icon type="ios-folder-outline" size="16px" />
-      <span style="margin-left: 5px;font-size: 14px;">{{article.category.name}}</span>
+      <!-- <span style="margin-left: 5px;font-size: 14px;" v-cloak>{{article.category.name}}</span> -->
     </Col>
     <Col span="2">
       <Icon type="ios-eye-outline" size="16px" />
@@ -36,8 +36,8 @@ export default {
   },
   filters: {
     timeFormat: function(value) {
-      if(!value) return ''
-      return value.substr(0,10)
+      if(!value) return '';
+      return value.substr(0,10);
     }
   },
   methods: {

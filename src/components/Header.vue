@@ -13,21 +13,21 @@
         </div>
       </Col>
       <Col span="12">
-        <Menu mode="horizontal" theme="light" active-name="1">
+        <Menu mode="horizontal" theme="light" active-name="blog" v-on:on-select="selectChange">
           <div class="layout-nav">
-            <MenuItem name="1">
+            <MenuItem name="blog">
                 <Icon type="ios-keypad"></Icon>
                 博客
             </MenuItem>
-            <MenuItem name="2">
-                <Icon type="ios-navigate"></Icon>
-                简历
-            </MenuItem>
-            <MenuItem name="3">
+            <MenuItem name="works">
                 <Icon type="ios-paper"></Icon>
                 作品
             </MenuItem>
-            <MenuItem name="4">
+            <MenuItem name="resume">
+                <Icon type="ios-navigate"></Icon>
+                简历
+            </MenuItem>
+            <MenuItem name="me">
                 <Icon type="ios-analytics"></Icon>
                 个人
             </MenuItem>
@@ -53,7 +53,19 @@
 //import { Row, Col } from 'iview';
 export default {
   name: "Header",
-  data: () => ({})
+  data: () => ({}),
+  methods: {
+    selectChange: function(name){
+      switch (name) {
+        case 'blog':
+        this.$router.push({name: 'articlelist'})
+        break;
+        case 'works':
+        this.$router.push({name: 'works'})
+        break;
+      }
+    }
+  }
   //components: { "Row": Row, "Col": Col}
 };
 </script>

@@ -18,7 +18,7 @@
             <span style="margin-left: 5px;font-weight: bold;">文章分类</span>
           </div>
           <div>
-            <div vertical class="classify" v-for="(category, key, index) in categories" v-bind:key="category.id">
+            <div vertical class="classify" v-for="(category, key, index) in categories" v-bind:key="category.id" v-show="category.posts_count">
               <span>{{category.name}}</span>
               <Badge v-bind:count="category.posts_count" class-name="badge-color"></Badge>
             </div>
@@ -72,7 +72,7 @@
 
 <script>
   export default {
-    name: "Content",
+    name: "BlogContent",
     data: () => ({
       categories: [],
       recommendedPosts: [],
@@ -106,6 +106,7 @@
 </script>
 <style scoped>
   .content {
+    flex: 1;
     max-width: 1200px;
     /* background-color: #fff; */
     margin: 80px auto 0;

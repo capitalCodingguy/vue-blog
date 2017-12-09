@@ -39,7 +39,7 @@ export default {
   props: ["post"],
   data: () => ({
     limit: 1,
-    total: 100,
+    total: 0,
     posts: [],
   }),
   methods: {
