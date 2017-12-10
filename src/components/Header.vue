@@ -20,16 +20,16 @@
                 博客
             </MenuItem>
             <MenuItem name="works">
-                <Icon type="ios-paper"></Icon>
+                <Icon type="compose"></Icon>
                 作品
             </MenuItem>
             <MenuItem name="resume">
-                <Icon type="ios-navigate"></Icon>
+                <Icon type="clipboard"></Icon>
                 简历
             </MenuItem>
             <MenuItem name="me">
-                <Icon type="ios-analytics"></Icon>
-                个人
+                <Icon type="happy-outline"></Icon>
+                关于我
             </MenuItem>
           </div>
         </Menu>

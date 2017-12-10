@@ -12,10 +12,10 @@
             一别离洛阳，五载耕织忙！轻身欲何往，帝都燕子梁。
         </p>
         <div class="links">
-            <a href="/blog">Blog</a>
-            <a href="/share">Project</a>
+            <a href="#/blog">Blog</a>
+            <a href="#/works/">Project</a>
             <a target="_blank" href="http://weibo.com/1839900520">Weibo</a>
-            <a target="_blank" href="https://github.com/jcc">GitHub</a>
+            <a target="_blank" href="https://github.com/capitalCodingguy">GitHub</a>
             <a href="/about">Me</a>
             <a href="/donate">Donate</a>
         </div>
