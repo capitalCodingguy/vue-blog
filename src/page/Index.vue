@@ -1,6 +1,7 @@
 <template>
   <div class="layout">
     <my-header />
+    <my-crumbs />
     <router-view></router-view>
     <my-footer />
   </div>
@@ -9,6 +10,7 @@
 <script>
   import Header from '@/components/Header'
   import Footer from '@/components/Footer'
+  import Crumbs from '@/components/Crumbs'
   export default {
     name: 'Index',
     data () {
@@ -18,7 +20,8 @@
     },
     components: {
       'my-header': Header,
-      'my-footer': Footer
+      'my-footer': Footer,
+      'my-crumbs': Crumbs,
     }
   }
 </script>

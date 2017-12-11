@@ -58,11 +58,16 @@ export default {
     selectChange: function(name){
       switch (name) {
         case 'blog':
-        this.$router.push({name: 'articlelist'})
+          this.$router.push({name: 'articlelist'})
+          this.$store.commit('setCrumbs', [{url: '/blog/', title: '博客'}])
         break;
         case 'works':
-        this.$router.push({name: 'works'})
+          this.$router.push({name: 'works'})
+          this.$store.commit('setCrumbs', [{url: '/works/', title: '作品列表'}])
         break;
+        case 'me':
+          this.$router.push({name: 'me'})
+          this.$store.commit('setCrumbs', [{url: '/me/', title: '关于我'}]);
       }
     }
   }

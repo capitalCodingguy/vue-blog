@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "axios": "^0.17.1",
+    "echarts": "^3.8.5",
     "iview": "^2.7.3",
     "mavon-editor": "^2.4.7",
     "particles.js": "^2.0.0",

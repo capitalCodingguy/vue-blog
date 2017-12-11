@@ -4,6 +4,7 @@ import Home from '@/page/Home'
 import Index from '@/page/Index'
 import BlogContent from '@/components/BlogContent'
 import WorksContent from '@/components/WorksContent'
+import MeContent from '@/components/MeContent'
 import ArticleList from '@/components/ArticleList'
 import Article from '@/components/Article'
 
@@ -43,6 +44,11 @@ export default new Router({
           name: 'works',
           path: '/works/',
           component: WorksContent,
+        },
+        {
+          name: 'me',
+          path: '/me/',
+          component: MeContent,
         }
       ]
     }

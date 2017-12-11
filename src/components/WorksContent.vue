@@ -1,13 +1,7 @@
 <template>
   <div class="content">
-    <div class="layout-breadcrumb">
-      <Breadcrumb>
-        <BreadcrumbItem href="">燕子梁筑</BreadcrumbItem>
-        <BreadcrumbItem href="">作品列表</BreadcrumbItem>
-      </Breadcrumb>
-    </div>
     <Row class="works-layout" type="flex" justify="center">
-      <Col span="24">
+      <Col span="24" style="margin-top: 40px;">
         <h2>个人作品列表</h2>
         <section id="cd-timeline" class="cd-container">
           <div class="cd-timeline-block">

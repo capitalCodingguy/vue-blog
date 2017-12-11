@@ -45,7 +45,7 @@ export default {
       this.articleId = this.$route.params.articleId;
       this.axios.get(this.web_api_url + 'blog/' + this.$route.params.articleId).then((res) => {
         this.article = res.data;
-        this.$store.commit('setArticle', res.data);
+        this.$store.commit('setCrumbs', [{url: '/blog/', title: '博客'},{url: '/blog/articlelist/', title: this.article.title }]);
       });
     },
     saveArticleData: function(data) {
@@ -57,7 +57,7 @@ export default {
   },
   destroyed: function () {
     //页面销毁之前，清楚state里的article数据
-    this.$store.commit('setArticle', '');
+    this.$store.commit('setCrumbs', [{url: '/blog/', title: '博客'}]);
   },
   components: {'mavon-editor': mavonEditor},
 };

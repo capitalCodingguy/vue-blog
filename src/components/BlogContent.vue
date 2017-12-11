@@ -1,14 +1,7 @@
 <template>
   <div class="content">
     <Row class="layout" type="flex" justify="space-between">
-      <Col span="16">
-        <div class="layout-breadcrumb">
-          <Breadcrumb>
-            <BreadcrumbItem href="">燕子梁筑</BreadcrumbItem>
-            <BreadcrumbItem href="/blog/articlelist">博客</BreadcrumbItem>
-            <BreadcrumbItem href="">{{setArticle}}</BreadcrumbItem>
-          </Breadcrumb>
-        </div>
+      <Col span="16" style="padding-top: 20px;">
         <router-view></router-view>
       </Col>
       <Col span="7" style="margin-top: 40px;">
@@ -108,11 +101,9 @@
   .content {
     flex: 1;
     max-width: 1200px;
-    /* background-color: #fff; */
     margin: 80px auto 0;
   }
   .layout-breadcrumb{
-    /* padding: 10px 0 0 20px; */
     padding-left: 20px;
   }
   .ivu-breadcrumb {
