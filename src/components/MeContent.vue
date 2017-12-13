@@ -1,13 +1,24 @@
 <template>
   <div class="content">
-    <Row class="works-layout" type="flex" justify="center">
-      <Col span="24" style="margin-top: 40px;padding: 25px;background-color: #fff;">
-        <h2>个人简介</h2>
+    
+    <Row class="works-layout" type="flex" justify="space-between">
+      
+      <Col span="24" style="margin-top: 40px;padding: 25px;">
+        <h2>关于我</h2>
         <div class="charts">
-          <div id="chartColumn" style="width:800px;height:500px;display: flex;align-items:center;justify-content:center;"></div>
-          <div id="chartBar" style="width:1200px; height:800px;"></div>
-          <div id="chartLine" style="width:100%; height:400px;"></div>
-          <div id="chartPie" style="width:100%; height:400px;"></div>
+          <div class="charts-tree">
+            <h2 style="text-align: left;">关键词</h2>
+            <div id="chartLine" style="width:800px; height:300px;"></div>
+          </div>
+          <div class="charts-tree">
+            <h2 style="text-align: left;">技能拓扑树</h2>
+            <div id="chartBar" style="width:800px;height:600px;"></div>
+          </div>
+          <div class="charts-tree">
+            <h2 style="text-align: left;">职业履历表</h2>
+            <div id="chartColumn" style="height:500px;display: flex;align-items:center;justify-content:center;"></div>
+          </div>
+          <!-- <div id="chartPie" style="width:800px; height:600px;"></div> -->
         </div>
       </Col>
     </Row>
@@ -15,6 +26,7 @@
 </template>
 <script>
 import echarts from "echarts";
+import wordCloud from "echarts-wordcloud";
 // import option from './assets/data/chartsSkill.json'
 export default {
   name: "MeContent",
@@ -28,84 +40,232 @@ export default {
     this.chartColumn = echarts.init(document.getElementById("chartColumn"));
     this.chartBar = echarts.init(document.getElementById("chartBar"));
     this.chartLine = echarts.init(document.getElementById("chartLine"));
-    this.chartPie = echarts.init(document.getElementById("chartPie"));
+    // this.chartPie = echarts.init(document.getElementById("chartPie"));
+
+    var dataCloud = {
+      cloudData: [
+        { name: "宅男", value: "25" },
+        { name: " 勤思考", value: " 14" },
+        { name: " 共产主义接班人", value: "13" },
+        { name: " 爱搞机", value: " 24" },
+        { name: " 村头小王子", value: " 30" },
+        { name: " 90后", value: " 1" },
+        { name: " 白羊", value: " 2" },
+        { name: " IT民工", value: "3" },
+        { name: " 沉默是金", value: "8" },
+        { name: " 前果粉", value: "5" },
+        { name: " 172", value: " 1" },
+        { name: " 废", value: " 2" },
+        { name: " 丧", value: " 18" },
+        { name: " 米粉", value: " 18" },
+        { name: " 数码控", value: " 1" },
+        { name: " 爱美剧", value: " 22" },
+        { name: " 北漂", value: " 23" },
+        { name: " 不偷井盖的河南人", value: " 31" },
+        { name: " 逗你玩儿", value: " 15" },
+        { name: " 刷机狂", value: " 12" },
+        { name: " k歌之王", value: " 22" },
+        { name: " 戏精", value: " 19" }
+      ],
+      cloudDiv: "chartLine"
+    };
+
+    var createRandomItemStyle1 = function(params) {
+      //此方法与下方配置中的第一个textStle下的color等同
+      var colors = [
+        "#fda67e",
+        "#81cacc",
+        "#cca8ba",
+        "#88cc81",
+        "#82a0c5",
+        "#fddb7e",
+        "#735ba1",
+        "#bda29a",
+        "#6e7074",
+        "#546570",
+        "#c4ccd3"
+      ];
+      return colors[parseInt(Math.random() * 10)];
+    };
+
+    var createRandomItemStyle2 = function() {
+      var colorArr = [
+        "#fda67e",
+        "#81cacc",
+        "#cca8ba",
+        "#88cc81",
+        "#82a0c5",
+        "#fddb7e",
+        "#735ba1",
+        "#bda29a",
+        "#6e7074",
+        "#546570",
+        "#c4ccd3"
+      ];
+      var flag = parseInt(Math.random() * 10);
+      return {
+        normal: {
+          fontFamily: "微软雅黑",
+          color: colorArr[flag]
+        }
+      };
+    };
+    function _setWordCloud(cloudData) {
+      var option = {
+        series: [
+          {
+            type: "wordCloud",
+            shape: "ellipse",
+            gridSize: 8,
+            textStyle: {
+              normal: {
+                // fontFamily: "微软雅黑",
+                color: function() {
+                  var colors = [
+                    "#fda67e",
+                    "#81cacc",
+                    "#cca8ba",
+                    "#88cc81",
+                    "#82a0c5",
+                    "#fddb7e",
+                    "#735ba1",
+                    "#bda29a",
+                    "#6e7074",
+                    "#546570",
+                    "#c4ccd3"
+                  ];
+                  return colors[parseInt(Math.random() * 10)];
+                }
+              }
+            },
+            data: cloudData
+          }
+        ]
+      };
+      return option;
+    }
+
+    //词云图初始化
+    function initWordCloud(wordCloudData) {
+      var option = _setWordCloud(wordCloudData.cloudData);
+      var myChart = echarts.init(
+        document.getElementById(wordCloudData.cloudDiv)
+      );
+      myChart.setOption(option);
+    }
+
+    initWordCloud(dataCloud);
 
     this.chartColumn.setOption({
-      title: { text: "职业履历表" },
-      tooltip: {},
-      xAxis: {
-        data: ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
+      tooltip: {
+        trigger: "axis"
       },
-      yAxis: {},
+      legend: {
+        data: ["html", "css", "html5", "css3", "js"]
+      },
+      toolbox: {
+        feature: {
+          saveAsImage: {}
+        }
+      },
+      grid: {
+        left: "3%",
+        right: "4%",
+        bottom: "3%",
+        containLabel: true
+      },
+      xAxis: [
+        {
+          type: "category",
+          boundaryGap: false,
+          data: ["2012", "2013", "2014", "2015", "2016", "2017", "2018"]
+        }
+      ],
+      yAxis: [
+        {
+          type: "value"
+        }
+      ],
       series: [
         {
-          name: "销量",
-          type: "bar",
-          data: [5, 20, 36, 10, 10, 20]
+          name: "html",
+          type: "line",
+          stack: "总量",
+          areaStyle: { normal: {} },
+          data: [82, 93, 90, 93, 87, 88, 32]
+        },
+        {
+          name: "css",
+          type: "line",
+          stack: "总量",
+          areaStyle: { normal: {} },
+          data: [82, 93, 90, 93, 87, 88, 32]
+        },
+        {
+          name: "html5",
+          type: "line",
+          stack: "总量",
+          areaStyle: { normal: {} },
+          data: [82, 93, 90, 93, 87, 88, 32]
+        },
+        {
+          name: "css3",
+          type: "line",
+          stack: "总量",
+          areaStyle: { normal: {} },
+          data: [82, 93, 90, 93, 87, 88, 32]
+        },
+        {
+          name: "js",
+          type: "line",
+          stack: "总量",
+          label: {
+            normal: {
+              show: true,
+              position: "top"
+            }
+          },
+          areaStyle: { normal: {} },
+          data: [82, 93, 90, 93, 87, 88, 32]
         }
       ]
     });
     this.chartBar.setOption({
-      // backgroundColor: new echarts.graphic.RadialGradient(0.3, 0.3, 0.8, [
-      //   {
-      //     offset: 0,
-      //     color: "#fff"
-      //   },
-      //   {
-      //     offset: 1,
-      //     color: "#fff"
-      //   }
-      // ]),
-      title: {
-        text: "职业技能树",
-        subtext: "tree",
-        top: "top",
-        left: "left"
-      },
+      // title: {
+      //   text: "职业技能树",
+      //   subtext: "tree",
+      //   top: "top",
+      //   left: "left"
+      // },
       tooltip: {},
-      legend: [
-        {
-          formatter: function(name) {
-            return echarts.format.truncateText(
-              name,
-              40,
-              "16px Microsoft Yahei",
-              "…"
-            );
-          },
-          tooltip: {
-            show: true
-          },
-          selectedMode: "false",
-          bottom: 20,
-          data: [
-            "javascript",
-            " 前端框架",
-            "app开发",
-            "html、css",
-            "后台相关",
-            "模块化",
-            "UI组件",
-            "工具",
-            "微信开发",
-            "html5游戏"
-          ]
-        }
-      ],
-      toolbox: {
-        show: false,
-        feature: {
-          dataView: {
-            show: true,
-            readOnly: true
-          },
-          restore: {
-            show: true
-          },
-          saveAsImage: {
-            show: true
-          }
-        }
+      legend: {
+        formatter: function(name) {
+          return echarts.format.truncateText(
+            name,
+            80,
+            "16px Microsoft Yahei",
+            "…"
+          );
+        },
+        tooltip: {
+          show: true
+        },
+        orient: "vertical",
+        selectedMode: "true",
+        right: "right",
+        bottom: "10%",
+        data: [
+          "javascript",
+          " 前端框架",
+          "app开发",
+          "html、css",
+          "后台相关",
+          "模块化",
+          "UI组件",
+          "工具",
+          "微信开发",
+          "html5游戏"
+        ]
       },
       animationDuration: 3000,
       animationEasingUpdate: "quinticInOut",
@@ -116,7 +276,7 @@ export default {
           layout: "force",
 
           force: {
-            repulsion: 350
+            repulsion: 200
           },
           data: [
             {
@@ -604,11 +764,23 @@ export default {
   max-width: 1200px;
   margin: 80px auto 0;
 }
+h2{
+  font-size: 16px;
+  color: #303e49;
+  font-weight: 400;
+}
 .works-layout {
-  max-width: 1200px;
+  /* max-width: 1200px; */
   margin-left: 20px;
 }
 .charts {
+  /* width: 1150px; */
   width: 100%;
+}
+.charts-tree {
+  padding: 20px;
+  margin-top: 20px;
+  background-color: #fff;
+  border-radius: 3px;
 }
 </style>
