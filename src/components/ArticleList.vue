@@ -19,7 +19,7 @@
             </Col>
           </Row>
         </div>
-        <p class="article-content">{{post.description}}</p>
+        <p class="article-content" v-on:click="goArticlePage(post.id)">{{post.description}}</p>
         <div class="card-foot">
           <Icon type="ios-pricetags-outline" size="30px" />
           <Button type="ghost" shape="circle" size="small" class="article-tag" v-for="(tag,key,index) in post.tags" v-bind:key="tag.id">{{tag.name}}</Button>
@@ -73,7 +73,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .content {
-  max-width: 1200px;
+  max-width: 1140px;
   margin-top: 20px;
   /* background-color: #fff; */
   margin: 20px auto 0;

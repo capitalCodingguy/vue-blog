@@ -36,7 +36,7 @@
       </Col>
       <Col span="3" style="text-align: right;">
         <div class="demo-avatar">
-          <Avatar icon="person" size="large" />
+          <Avatar src="http://ozynkcxdv.bkt.clouddn.com/wy.png" size="large" />
           <span style="margin-left: 5px;">帝都燕子梁</span>
         </div>
       </Col>
@@ -65,6 +65,10 @@ export default {
           this.$router.push({name: 'works'})
           this.$store.commit('setCrumbs', [{url: '/works/', title: '作品列表'}])
         break;
+        case 'resume':
+          this.$router.push({name: 'resume'})
+          this.$store.commit('setCrumbs', [{url: '/resume/', title: '个人简历'}])
+        break;
         case 'me':
           this.$router.push({name: 'me'})
           this.$store.commit('setCrumbs', [{url: '/me/', title: '关于我'}]);
@@ -89,7 +93,7 @@ export default {
 }
 .layout {
   margin: 0 auto;
-  max-width: 1200px;
+  max-width: 1140px;
 }
 .layout-logo {
   width: 100px;

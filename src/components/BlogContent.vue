@@ -4,7 +4,7 @@
       <Col span="16" style="padding-top: 20px;">
         <router-view></router-view>
       </Col>
-      <Col span="7" style="margin-top: 40px;">
+      <Col span="7" style="margin-top: 40px;margin-left: 20px;">
         <Card :bordered="false">
           <div slot="title">
             <Icon type="ios-folder-outline" size="14px" />
@@ -100,7 +100,7 @@
 <style scoped>
   .content {
     flex: 1;
-    max-width: 1200px;
+    max-width: 1140px;
     margin: 80px auto 0;
   }
   .layout-breadcrumb{

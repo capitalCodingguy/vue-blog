@@ -49,13 +49,16 @@ export default {
     width: 100%;
     display: flex;
     justify-content: center;
+    margin-left: 10px;
     /* align-items: center; */
     position: fixed;
-    top: 80px;
+    top: 62px;
     z-index: 10000;
   }
   .layout-breadcrumb{
-    width: 1200px;
-    padding-left: 20px;
+    width: 1120px;
+    padding: 20px 0 20px 0px;
+    background-color: #eff3f5;
+    border-radius: 3px; 
   }
 </style>

@@ -3,22 +3,20 @@
     
     <Row class="works-layout" type="flex" justify="space-between">
       
-      <Col span="24" style="margin-top: 40px;padding: 25px;">
-        <h2>关于我</h2>
+      <Col span="24" style="margin-top: 20px;">
         <div class="charts">
           <div class="charts-tree">
             <h2 style="text-align: left;">关键词</h2>
-            <div id="chartLine" style="width:800px; height:300px;"></div>
+            <div id="chartLine" style="width:1120px; height:300px;"></div>
           </div>
           <div class="charts-tree">
             <h2 style="text-align: left;">技能拓扑树</h2>
-            <div id="chartBar" style="width:800px;height:600px;"></div>
+            <div id="chartBar" style="width:1020px;height:600px;"></div>
           </div>
           <div class="charts-tree">
             <h2 style="text-align: left;">职业履历表</h2>
             <div id="chartColumn" style="height:500px;display: flex;align-items:center;justify-content:center;"></div>
           </div>
-          <!-- <div id="chartPie" style="width:800px; height:600px;"></div> -->
         </div>
       </Col>
     </Row>
@@ -27,7 +25,6 @@
 <script>
 import echarts from "echarts";
 import wordCloud from "echarts-wordcloud";
-// import option from './assets/data/chartsSkill.json'
 export default {
   name: "MeContent",
   data: () => ({
@@ -40,7 +37,6 @@ export default {
     this.chartColumn = echarts.init(document.getElementById("chartColumn"));
     this.chartBar = echarts.init(document.getElementById("chartBar"));
     this.chartLine = echarts.init(document.getElementById("chartLine"));
-    // this.chartPie = echarts.init(document.getElementById("chartPie"));
 
     var dataCloud = {
       cloudData: [
@@ -161,7 +157,24 @@ export default {
         trigger: "axis"
       },
       legend: {
-        data: ["html", "css", "html5", "css3", "js"]
+        formatter: function(name) {
+          return echarts.format.truncateText(
+            name,
+            80,
+            "16px Microsoft Yahei",
+            "…"
+          );
+        },
+        tooltip: {
+          show: false
+        },
+
+        width: '85%',
+        orient: "horizontal",
+        // selectedMode: "true",
+        // right: "right",
+        top: "5%",
+        data: ["html", "css", "js", "jquery", "ionic", "小程序" ,"vue", "typescript", "angular", "react", "egret", "mysql", "laravel", "php"]
       },
       toolbox: {
         feature: {
@@ -169,16 +182,17 @@ export default {
         }
       },
       grid: {
-        left: "3%",
-        right: "4%",
-        bottom: "3%",
+        left: "8%",
+        right: "8%",
+        top: '18%',
+        bottom: "4%",
         containLabel: true
       },
       xAxis: [
         {
           type: "category",
           boundaryGap: false,
-          data: ["2012", "2013", "2014", "2015", "2016", "2017", "2018"]
+          data: ["2013", "2014", "2015", "2016", "2017", "2018(年)"]
         }
       ],
       yAxis: [
@@ -191,42 +205,158 @@ export default {
           name: "html",
           type: "line",
           stack: "总量",
+          label: {
+            normal: {
+              show: false,
+              position: "bottom"
+            }
+          },
           areaStyle: { normal: {} },
-          data: [82, 93, 90, 93, 87, 88, 32]
+          data: [20, 39, 43, 57, 68, 82]
         },
         {
           name: "css",
           type: "line",
           stack: "总量",
+          label: {
+            normal: {
+              show: false,
+              position: "bottom"
+            }
+          },
           areaStyle: { normal: {} },
-          data: [82, 93, 90, 93, 87, 88, 32]
-        },
-        {
-          name: "html5",
-          type: "line",
-          stack: "总量",
-          areaStyle: { normal: {} },
-          data: [82, 93, 90, 93, 87, 88, 32]
-        },
-        {
-          name: "css3",
-          type: "line",
-          stack: "总量",
-          areaStyle: { normal: {} },
-          data: [82, 93, 90, 93, 87, 88, 32]
+          data: [13, 20, 35, 42, 55, 62]
         },
         {
           name: "js",
           type: "line",
           stack: "总量",
+          areaStyle: { normal: {} },
+          data: [10, 22, 33, 48, 68, 72]
+        },
+        {
+          name: "jquery",
+          type: "line",
+          stack: "总量",
           label: {
             normal: {
-              show: true,
-              position: "top"
+              show: false,
+              position: "bottom"
             }
           },
           areaStyle: { normal: {} },
-          data: [82, 93, 90, 93, 87, 88, 32]
+          data: [0, 10, 23, 37, 48, 22]
+        },
+        {
+          name: "ionic",
+          type: "line",
+          stack: "总量",
+          areaStyle: { normal: {} },
+          data: [0, 0, 0, 20, 48, 72]
+        },
+        {
+          name: "小程序",
+          type: "line",
+          stack: "总量",
+          label: {
+            normal: {
+              show: false,
+              position: "bottom"
+            }
+          },
+          areaStyle: { normal: {} },
+          data: [0, 0, 0, 0, 40, 52]
+        },
+        {
+          name: "vue",
+          type: "line",
+          stack: "总量",
+          label: {
+            normal: {
+              show: false,
+              position: "bottom"
+            }
+          },
+          areaStyle: { normal: {} },
+          data: [0, 0, 0, 0, 18, 42]
+        },
+        {
+          name: "typescript",
+          type: "line",
+          stack: "总量",
+          label: {
+            normal: {
+              show: false,
+              position: "bottom"
+            }
+          },
+          areaStyle: { normal: {} },
+          data: [0, 0, 0, 20, 48, 62]
+        },
+        {
+          name: "angular",
+          type: "line",
+          stack: "总量",
+          label: {
+            normal: {
+              show: false,
+              position: "bottom"
+            }
+          },
+          areaStyle: { normal: {} },
+          data: [0, 0, 0, 40, 55, 70]
+        },
+        {
+          name: "react",
+          type: "line",
+          stack: "总量",
+          label: {
+            normal: {
+              show: false,
+              position: "bottom"
+            }
+          },
+          areaStyle: { normal: {} },
+          data: [0, 0, 0, 20, 35, 40]
+        },
+        {
+          name: "mysql",
+          type: "line",
+          stack: "总量",
+          label: {
+            normal: {
+              show: false,
+              position: "bottom"
+            }
+          },
+          areaStyle: { normal: {} },
+          data: [0, 0, 0, 15, 20, 33]
+        },
+        {
+          name: "laravel",
+          type: "line",
+          stack: "总量",
+          label: {
+            normal: {
+              show: false,
+              position: "bottom"
+            }
+          },
+          areaStyle: { normal: {} },
+          data: [0, 0, 0, 10, 15, 30]
+        },
+        {
+          name: "php",
+          type: "line",
+          stack: "总量",
+          label: {
+            normal: {
+              show: false,
+              position: "bottom"
+            }
+          },
+          areaStyle: { normal: {} },
+          data: [0, 0, 0, 5, 25, 33]
         }
       ]
     });
@@ -253,7 +383,7 @@ export default {
         orient: "vertical",
         selectedMode: "true",
         right: "right",
-        bottom: "10%",
+        bottom: "5%",
         data: [
           "javascript",
           " 前端框架",
@@ -761,7 +891,7 @@ export default {
 <style scoped>
 .content {
   flex: 1;
-  max-width: 1200px;
+  max-width: 1140px;
   margin: 80px auto 0;
 }
 h2{
@@ -770,7 +900,7 @@ h2{
   font-weight: 400;
 }
 .works-layout {
-  /* max-width: 1200px; */
+  /* max-width: 1140px; */
   margin-left: 20px;
 }
 .charts {

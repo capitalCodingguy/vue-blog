@@ -65,7 +65,7 @@ export default {
 
 <style scoped>
   .content {
-    max-width: 1200px;
+    max-width: 1140px;
     min-height: 1000px;
     background-color: #fff;
     margin: 20px 0 0 20px;
