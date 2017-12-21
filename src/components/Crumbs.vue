@@ -31,7 +31,7 @@ export default {
       return this.$store.state.article.title;
     },
     setCrumbs () {
-      return this.$store.state.Crumbs;
+      return this.$store.state.crumbs;
     }
   },
   methods: {
@@ -56,7 +56,7 @@ export default {
     z-index: 10000;
   }
   .layout-breadcrumb{
-    width: 1120px;
+    width: 1180px;
     padding: 20px 0 20px 0px;
     background-color: #eff3f5;
     border-radius: 3px; 

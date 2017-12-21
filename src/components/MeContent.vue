@@ -7,7 +7,7 @@
         <div class="charts">
           <div class="charts-tree">
             <h2 style="text-align: left;">关键词</h2>
-            <div id="chartLine" style="width:1120px; height:300px;"></div>
+            <div id="chartLine" style="width:1180px; height:300px;"></div>
           </div>
           <div class="charts-tree">
             <h2 style="text-align: left;">技能拓扑树</h2>
@@ -891,8 +891,8 @@ export default {
 <style scoped>
 .content {
   flex: 1;
-  max-width: 1140px;
-  margin: 80px auto 0;
+  max-width: 1200px;
+  margin: 84px auto 0;
 }
 h2{
   font-size: 16px;
@@ -900,7 +900,7 @@ h2{
   font-weight: 400;
 }
 .works-layout {
-  /* max-width: 1140px; */
+  /* max-width: 1200px; */
   margin-left: 20px;
 }
 .charts {

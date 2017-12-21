@@ -6,14 +6,19 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
     state: {
         article: '',
-        Crumbs: [{url: '/blog/', title: '博客'}],
+        crumbs: [{url: '/blog/', title: '博客'}],
+        blogListUrl: 'blog_list',
     },
     mutations:{
       setArticle (state, msg) {
         state.article = msg;
       },
       setCrumbs (state, msg) {
-        state.Crumbs = msg;
+        console.log(msg);
+        state.crumbs = msg;
+      },
+      setBlogListUrl (state, msg) {
+        state.blogListUrl = msg;
       }
     }
 })

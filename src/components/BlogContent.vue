@@ -35,22 +35,12 @@
             <span style="margin-left: 5px;font-weight: bold;">热门标签</span>
           </div>
           <div class="tag-content">
-            <Button type="ghost" class="tag-button" shape="circle" size="small">Circle</Button>
-            <Button type="ghost" class="tag-button" shape="circle" size="small">Circle</Button>
-            <Button type="ghost" class="tag-button" shape="circle" size="small">Circle</Button>
-            <Button type="ghost" class="tag-button" shape="circle" size="small">Circle</Button>
-          </div>
-        </Card>
-        <Card :bordered="false" style="margin-top: 20px;">
-          <div slot="title">
-            <Icon type="ios-flame-outline" size="14px" />
-            <span style="margin-left: 5px;font-weight: bold;">热门评论</span>
-          </div>
-          <div class="tag-content">
-            <Button type="ghost" class="tag-button" shape="circle" size="small">Circle</Button>
-            <Button type="ghost" class="tag-button" shape="circle" size="small">Circle</Button>
-            <Button type="ghost" class="tag-button" shape="circle" size="small">Circle</Button>
-            <Button type="ghost" class="tag-button" shape="circle" size="small">Circle</Button>
+            <Button v-for="(tag, key, index) in tags" v-bind:key="key" v-if="tag.posts_count" 
+              v-on:click="getArticleList(tag)"
+              type="ghost" class="tag-button" shape="circle" size="small">
+              {{tag.name}}
+              <Badge v-bind:count="tag.posts_count" class-name="badge-color"></Badge>
+            </Button>
           </div>
         </Card>
       </Col>
@@ -67,6 +57,7 @@
   export default {
     name: "BlogContent",
     data: () => ({
+      tags: [],
       categories: [],
       recommendedPosts: [],
       article: ''
@@ -76,6 +67,8 @@
       this.getHotArticle();
       //请求文章分类列表
       this.getArticleCategory();
+      //请求标签列表
+      this.getTags();
     },
     methods: {
       getHotArticle: function(){
@@ -87,6 +80,15 @@
         this.axios.get(this.web_api_url + 'categories').then((res) => {
           this.categories = res.data;
         });
+      },
+      getTags: function(){
+        this.axios.get(this.web_api_url + 'tag').then((res) => {
+          this.tags = res.data;
+        });
+      },
+      getArticleList: function(tag){
+        this.$store.commit('setBlogListUrl', 'tag/' + tag.name)
+        this.$store.commit('setCrumbs', [{url: '/blog/', title: '标签'}])
       }
     },
     computed: {
@@ -100,8 +102,8 @@
 <style scoped>
   .content {
     flex: 1;
-    max-width: 1140px;
-    margin: 80px auto 0;
+    max-width: 1200px;
+    margin: 84px auto 0;
   }
   .layout-breadcrumb{
     padding-left: 20px;
@@ -122,7 +124,7 @@
     height: 42px;
   }
   .tag-content {
-    display: flex;
+    text-align: left;
   }
   .tag-button {
     margin: 0 5px 5px;

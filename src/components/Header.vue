@@ -58,8 +58,9 @@ export default {
     selectChange: function(name){
       switch (name) {
         case 'blog':
-          this.$router.push({name: 'articlelist'})
+          this.$router.push({name: 'articlelist'}) 
           this.$store.commit('setCrumbs', [{url: '/blog/', title: '博客'}])
+          this.$store.commit('setBlogListUrl', 'blog_list')
         break;
         case 'works':
           this.$router.push({name: 'works'})
@@ -93,7 +94,7 @@ export default {
 }
 .layout {
   margin: 0 auto;
-  max-width: 1140px;
+  max-width: 1200px;
 }
 .layout-logo {
   width: 100px;

@@ -152,8 +152,8 @@
 <style scoped>
   .content {
     flex: 1;
-    max-width: 1140px;
-    margin: 80px auto 0;
+    max-width: 1200px;
+    margin: 84px auto 0;
   }
   h2 {
     font-size: 16px;
@@ -164,7 +164,7 @@
     margin-top: 20px;
     margin-left: 20px;
     text-align: left;
-    min-width: 1120px;
+    min-width: 1180px;
   }
   .item .list {
     margin-top: 15px;

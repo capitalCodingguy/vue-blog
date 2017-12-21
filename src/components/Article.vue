@@ -45,7 +45,10 @@ export default {
       this.articleId = this.$route.params.articleId;
       this.axios.get(this.web_api_url + 'blog/' + this.$route.params.articleId).then((res) => {
         this.article = res.data;
-        this.$store.commit('setCrumbs', [{url: '/blog/', title: '博客'},{url: '/blog/articlelist/', title: this.article.title }]);
+        //更新面包屑导航数据
+        let crumbs = this.$store.state.crumbs;
+        crumbs.push({url: '/blog/articlelist/', title: this.article.title });
+        this.$store.commit('setCrumbs', crumbs);
       });
     },
     saveArticleData: function(data) {
@@ -57,7 +60,9 @@ export default {
   },
   destroyed: function () {
     //页面销毁之前，清楚state里的article数据
-    this.$store.commit('setCrumbs', [{url: '/blog/', title: '博客'}]);
+    let crumbs = this.$store.state.crumbs;
+    crumbs.pop();
+    this.$store.commit('setCrumbs', crumbs);
   },
   components: {'mavon-editor': mavonEditor},
 };
@@ -65,7 +70,7 @@ export default {
 
 <style scoped>
   .content {
-    max-width: 1140px;
+    max-width: 1200px;
     min-height: 1000px;
     background-color: #fff;
     margin: 20px 0 0 20px;

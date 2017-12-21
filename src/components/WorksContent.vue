@@ -82,7 +82,7 @@ export default {
 <style scoped>
 .content {
   flex: 1;
-  min-width: 1140px;
+  min-width: 1200px;
   margin: 80px auto 0;
 }
 .layout-breadcrumb{

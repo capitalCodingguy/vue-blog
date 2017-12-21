@@ -40,6 +40,7 @@ export default {
   data: () => ({
     limit: 1,
     total: 0,
+    blogListUrl: 'blog_list',
     posts: [],
   }),
   methods: {
@@ -49,7 +50,8 @@ export default {
       this.getBlogList();
     },
     getBlogList: function(){
-      this.axios.get(this.web_api_url + 'blog_list' + '?page=' + this.limit).then((res) => {
+      this.blogListUrl = this.$store.state.blogListUrl;
+      this.axios.get(this.web_api_url + this.blogListUrl + '?page=' + this.limit).then((res) => {
         this.total = res.data.total;
         this.posts = res.data.data;
       });
@@ -62,6 +64,17 @@ export default {
     //请求博客列表
     this.getBlogList();
   },
+  computed: {
+    //请求博客列表
+    getBlogUrl() {
+      return this.$store.state.blogListUrl;
+    }
+  },
+  watch: {
+    getBlogUrl() {
+      this.getBlogList();
+    }
+  },
   filters: {
     timeFormat: function(value) {
       if (!value) return "";
@@ -70,10 +83,9 @@ export default {
   }
 };
 </script>
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .content {
-  max-width: 1140px;
+  max-width: 1200px;
   margin-top: 20px;
   /* background-color: #fff; */
   margin: 20px auto 0;
@@ -100,6 +112,7 @@ export default {
 }
 .article-content {
   text-align: left;
+  cursor:pointer;
 }
 .card-foot {
   height: 40px;
