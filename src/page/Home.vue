@@ -13,10 +13,10 @@
         </p>
         <div class="links">
             <a href="#/blog">Blog</a>
-            <a href="#/works/">Project</a>
+            <a href="#/works">Project</a>
             <a target="_blank" href="http://weibo.com/1839900520">Weibo</a>
             <a target="_blank" href="https://github.com/capitalCodingguy">GitHub</a>
-            <a href="/about">Me</a>
+            <a href="#/me">Me</a>
             <a href="/donate">Donate</a>
         </div>
     </div>
@@ -32,6 +32,9 @@
     },
     mounted () {
       particlesJS.load('particles', '../../src/assets/data/particlesJsData.json')
+    },
+    methods: {
+      
     }
   }
 </script>
@@ -39,7 +42,8 @@
 <style scoped>
   @font-face {
     font-family: Mini-webfont;
-    src: url("../assets/font/Mini.ttf");
+    /* src: url("../assets/font/Mini.ttf"); */
+    src: url("http://ozynkcxdv.bkt.clouddn.com/Mini.ttf");
   }
   body {
     margin: 0;

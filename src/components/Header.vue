@@ -1,46 +1,46 @@
 <template>
   <div class="header">
-    <Row type="flex" justify="start" class="layout">
-      <Col span="5" style="text-align: left;">
+    <IRow type="flex" justify="start" class="layout">
+      <ICol span="5" style="text-align: left;">
         <div class="layout-logo">
           <img class="layout-img" src="http://ozynkcxdv.bkt.clouddn.com/%E9%A3%9E%E9%B1%BC%E6%9C%8D.png" alt="帝都燕子梁">
         </div>
         <h1 class="layout-title">燕子梁筑</h1>
-      </Col>
-      <Col span="4">
+      </ICol> 
+      <ICol span="4">
         <div class="layout-input">
-          <Input placeholder="搜索"></Input>
+          <IInput placeholder="搜索"></IInput>
         </div>
-      </Col>
-      <Col span="12">
-        <Menu mode="horizontal" theme="light" active-name="blog" v-on:on-select="selectChange">
+      </ICol>
+      <ICol span="12">
+        <IMenu mode="horizontal" theme="light" :active-name="name" v-on:on-select="selectChange">
           <div class="layout-nav">
-            <MenuItem name="blog">
-                <Icon type="ios-keypad"></Icon>
+            <IMenuItem name="blog">
+                <IIcon type="ios-keypad"></IIcon>
                 博客
-            </MenuItem>
-            <MenuItem name="works">
-                <Icon type="compose"></Icon>
+            </IMenuItem>
+            <IMenuItem name="works">
+                <IIcon type="compose"></IIcon>
                 作品
-            </MenuItem>
-            <MenuItem name="resume">
-                <Icon type="clipboard"></Icon>
+            </IMenuItem>
+            <IMenuItem name="resume">
+                <IIcon type="clipboard"></IIcon>
                 简历
-            </MenuItem>
-            <MenuItem name="me">
-                <Icon type="happy-outline"></Icon>
+            </IMenuItem>
+            <IMenuItem name="me">
+                <IIcon type="happy-outline"></IIcon>
                 关于我
-            </MenuItem>
+            </IMenuItem>
           </div>
-        </Menu>
-      </Col>
-      <Col span="3" style="text-align: right;">
+        </IMenu>
+      </ICol> 
+      <ICol span="3" style="text-align: right;">
         <div class="demo-avatar">
-          <Avatar src="http://ozynkcxdv.bkt.clouddn.com/wy.png" size="large" />
+          <IAvatar src="http://ozynkcxdv.bkt.clouddn.com/wy.png" size="large" />
           <span style="margin-left: 5px;">帝都燕子梁</span>
         </div>
-      </Col>
-    </Row>
+      </ICol>
+    </IRow>
   </div>
 </template>
 <style>
@@ -50,16 +50,20 @@
 </style>
 
 <script>
-//import { Row, Col } from 'iview';
+import { Avatar, Icon, Input } from 'iview';
+import { Row, Col } from 'iview/src/components/grid';
+import IviewMenu from 'iview/src/components/menu';
 export default {
   name: "Header",
-  data: () => ({}),
-  methods: {
+  data: () => ({
+    name: 'blog'
+  }),
+  methods: { 
     selectChange: function(name){
       switch (name) {
         case 'blog':
           this.$router.push({name: 'articlelist'}) 
-          this.$store.commit('setCrumbs', [{url: '/blog/', title: '博客'}])
+          this.$store.commit('setCrumbs', [{url: '/', title: '博客'}])
           this.$store.commit('setBlogListUrl', 'blog_list')
         break;
         case 'works':
@@ -75,15 +79,26 @@ export default {
           this.$store.commit('setCrumbs', [{url: '/me/', title: '关于我'}]);
       }
     }
-  }
-  //components: { "Row": Row, "Col": Col}
+  },
+  // computed: {
+  //   getCurrentName(){
+  //     return this.$store.state.crumbs;
+  //   }
+  // },
+  // watch: {
+  //   getCurrentName() {
+  //     this.name = this.$store.state.crumbs[0]['url'];
+  //   }
+  // },
+  components: {"IMenu": IviewMenu, "IMenuItem": IviewMenu.Item, "IIcon": Icon, "IRow": Row, "ICol": Col, "IInput": Input, "IAvatar": Avatar}
 };
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 @font-face {
   font-family: Mini-webfont;
-  src: url("../assets/font/Mini.ttf");
+  /* src: url("../assets/font/Mini.ttf"); */
+  src: url("http://ozynkcxdv.bkt.clouddn.com/Mini.ttf");
 }
 .header {
   width: 100%;

@@ -15,7 +15,8 @@ module.exports = {
   },
   output: {
     path: config.build.assetsRoot,
-    filename: '[name].js',
+    filename: config.dev?'[name].js':'[name].js?[chunkhash]',
+    chunkFilename: 'chunk[id].js?[chunkhash]',
     publicPath: process.env.NODE_ENV === 'production'
       ? config.build.assetsPublicPath
       : config.dev.assetsPublicPath
@@ -42,13 +43,20 @@ module.exports = {
               options: {
                   prefix: false
               }
-          }
+          },
+          // {
+          //     loader: 'babel-loader',
+          //     options: {
+          //       presets: [['es2015', {modules: false}]],
+          //       plugins: ['syntax-dynamic-import']
+          //     }
+          // }
         ]
-      },
+      }, 
       {
         test: /\.js$/,
         loader: 'babel-loader',
-        include: [resolve('src'), resolve('test')]
+        include: [resolve('src'), resolve('test'), resolve('/node_modules/iview/src'), resolve('/node_modules/iview/packages')]
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,

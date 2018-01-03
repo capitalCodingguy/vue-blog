@@ -8,17 +8,20 @@ const store = new Vuex.Store({
         article: '',
         crumbs: [{url: '/blog/', title: '博客'}],
         blogListUrl: 'blog_list',
-    },
-    mutations:{
+        isChangeTotal: 'blogList'
+    }, 
+    mutations:{ 
       setArticle (state, msg) {
         state.article = msg;
       },
       setCrumbs (state, msg) {
-        console.log(msg);
         state.crumbs = msg;
       },
       setBlogListUrl (state, msg) {
         state.blogListUrl = msg;
+      },
+      setIsChangeTotal (state, msg) {
+        state.isChangeTotal = msg
       }
     }
 })

@@ -1,14 +1,15 @@
 <template>
   <div class="footer">
-   <Row type="flex" justify="center" align="middle" style="height: 60px;alian-item: center;">
-    <Col span="24" class="footer-title">
+   <IRow type="flex" justify="center" align="middle" style="height: 60px;alian-item: center;">
+    <ICol span="24" class="footer-title">
       <p>Copyright © | 京ICP备16008148号-2 | Powered by swallowfly |  Feed</p>
-    </Col>
-   </Row>
+    </ICol>
+   </IRow>
   </div>
 </template>
 <script>
 //引入markdown编辑文件
+import { Row, Col } from 'iview/src/components/grid';
 import { mavonEditor } from "mavon-editor";
 import "mavon-editor/dist/css/index.css";
 export default {
@@ -22,7 +23,7 @@ export default {
   methods: {
     
   },
-  components: { }
+  components: { "IRow": Row, "ICol": Col }
 };
 </script>
 

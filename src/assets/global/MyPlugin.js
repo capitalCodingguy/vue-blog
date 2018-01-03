@@ -4,7 +4,8 @@ let MyPlugin = {};
 MyPlugin.install = function(Vue, options) {
     // 1. 添加全局方法或属性
     Vue.myGlobalMethod = function () {
-        Vue.prototype.web_api_url = "http://blog.app/api/"
+        // Vue.prototype.web_api_url = "http://api.swallowfly.cn/api/"
+        Vue.prototype.web_api_url = "http://blog.test/api/" 
     }
     // 2. 添加全局资源
     Vue.directive('my-directive', {

@@ -9,7 +9,6 @@ import store from './vuex/store'
 //引入首页粒子动画js
 import particles from 'particles.js'
 
-import iView from 'iview'
 import 'iview/dist/styles/iview.css'
 import '../my-theme/index.less'
 
@@ -17,9 +16,9 @@ import MyPlugin from './assets/global/MyPlugin'
 
 Vue.config.productionTip = false
 
-Vue.use(iView)
 Vue.use(Vuex)
 Vue.use(particles)
+
 Vue.use(VueAxios, axios)
 
 //全局变量

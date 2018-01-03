@@ -1,14 +1,15 @@
 <template>
   <div class="crumbs">
     <div class="layout-breadcrumb">
-      <Breadcrumb style="text-align: left;">
-        <BreadcrumbItem href="">燕子梁筑</BreadcrumbItem>
-        <BreadcrumbItem v-bind:href="crumb.url" v-for="(crumb, key, index) in setCrumbs" v-bind:key="key">{{crumb.title}}</BreadcrumbItem>
-      </Breadcrumb>
+      <IBreadcrumb style="text-align: left;">
+        <IBreadcrumbItem href="">燕子梁筑</IBreadcrumbItem>
+        <IBreadcrumbItem v-bind:href="crumb.url" v-for="(crumb, key, index) in setCrumbs" v-bind:key="key" v-if="crumb.title">{{crumb.title}}</IBreadcrumbItem>
+      </IBreadcrumb>
     </div>
   </div>
 </template>
 <script>
+import { Breadcrumb } from 'iview';
 export default {
   name: "Crumbs",
   data: () => ({
@@ -40,7 +41,7 @@ export default {
   destroyed: function () {
 
   },
-  components: { }
+  components: { "IBreadcrumb": Breadcrumb, "IBreadcrumbItem": Breadcrumb.Item }
 };
 </script>
 

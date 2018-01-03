@@ -1,30 +1,42 @@
 <template>
   <div class="content">
-    <Row class="works-layout" type="flex" justify="center">
-      <Col span="24" style="margin-top: 20px;">
+    <IRow class="works-layout" type="flex" justify="center">
+      <ICol span="24" style="margin-top: 20px;">
         <h2>个人作品列表</h2>
         <section id="cd-timeline" class="cd-container" >
-          <div class="cd-timeline-block" v-for="(work, key) of works" v-bind:key="key">
-            <div class="cd-timeline-img cd-movie">
-                <div style="background-color: #9caebf;"></div>
+          <transition-group
+            appear 
+            v-on:enter="enter"
+            v-on:leave="leave"
+            v-on:before-appear="beforeAppear"
+            v-on:appear="appear"
+            :css="false">
+            <div class="cd-timeline-block" v-for="(work, key) of works" v-bind:key="key">
+              <div class="cd-timeline-img cd-movie">
+                  <div style="background-color: #9caebf;"></div>
+              </div>
+              <div class="cd-timeline-content">
+                  <h2>{{work.title}}</h2>
+                  <p style="text-align: left;text-indent: 2em;">{{work.content}}</p>
+                  <span class="cd-date">{{work.time}}</span>
+                  <div v-if="work.imglist.length" class="cd-img-list">
+                    <img style="width: 33%;height: 100%;" class="preview-img" v-for="(img, value, index) of work.imglist" v-bind:key="key" v-bind:src="img" @click="clickImg($event)" alt="">
+                    <big-img v-if="showBigImg" @clickit="viewBigImg" :imgSrc="imgSrc"></big-img>
+                  </div>
+                  <div v-if="!work.imglist.length" class="cd-img-list">
+                    <img style="width: 33%;height: 100%;" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1513420996039&di=37221cd7f5e5c97b3fcccd3d8f70cdd6&imgtype=0&src=http%3A%2F%2Fb.hiphotos.baidu.com%2Fimage%2Fcrop%253D0%252C0%252C600%252C998%2Fsign%3D8a8e1a10fd36afc31a4365258e29c7f4%2F4afbfbedab64034ff13195d6a5c379310b551d65.jpg" alt="">
+                    <img style="width: 33%;height: 100%;" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1513420996039&di=37221cd7f5e5c97b3fcccd3d8f70cdd6&imgtype=0&src=http%3A%2F%2Fb.hiphotos.baidu.com%2Fimage%2Fcrop%253D0%252C0%252C600%252C998%2Fsign%3D8a8e1a10fd36afc31a4365258e29c7f4%2F4afbfbedab64034ff13195d6a5c379310b551d65.jpg" alt="">
+                    <img style="width: 33%;height: 100%;" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1513420996039&di=37221cd7f5e5c97b3fcccd3d8f70cdd6&imgtype=0&src=http%3A%2F%2Fb.hiphotos.baidu.com%2Fimage%2Fcrop%253D0%252C0%252C600%252C998%2Fsign%3D8a8e1a10fd36afc31a4365258e29c7f4%2F4afbfbedab64034ff13195d6a5c379310b551d65.jpg" alt="">
+                  </div>
+                  <p style="text-align: right;color: #9caebf;margin-right: 6px;cursor:pointer;">
+                    <a target="_blank" href="http://www.baidu.com" style="color: #9caebf;">查看详情</a>
+                  </p>
+              </div>
             </div>
-            <div class="cd-timeline-content">
-                <h2>{{work.title}}</h2>
-                <p style="text-align: left;text-indent: 2em;">{{work.content}}</p>
-                <span class="cd-date">{{work.time}}</span>
-                <div class="cd-img-list">
-                  <img style="width: 33%;height: 100%;" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1513420996039&di=37221cd7f5e5c97b3fcccd3d8f70cdd6&imgtype=0&src=http%3A%2F%2Fb.hiphotos.baidu.com%2Fimage%2Fcrop%253D0%252C0%252C600%252C998%2Fsign%3D8a8e1a10fd36afc31a4365258e29c7f4%2F4afbfbedab64034ff13195d6a5c379310b551d65.jpg" alt="">
-                  <img style="width: 33%;height: 100%;" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1513420996039&di=37221cd7f5e5c97b3fcccd3d8f70cdd6&imgtype=0&src=http%3A%2F%2Fb.hiphotos.baidu.com%2Fimage%2Fcrop%253D0%252C0%252C600%252C998%2Fsign%3D8a8e1a10fd36afc31a4365258e29c7f4%2F4afbfbedab64034ff13195d6a5c379310b551d65.jpg" alt="">
-                  <img style="width: 33%;height: 100%;" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1513420996039&di=37221cd7f5e5c97b3fcccd3d8f70cdd6&imgtype=0&src=http%3A%2F%2Fb.hiphotos.baidu.com%2Fimage%2Fcrop%253D0%252C0%252C600%252C998%2Fsign%3D8a8e1a10fd36afc31a4365258e29c7f4%2F4afbfbedab64034ff13195d6a5c379310b551d65.jpg" alt="">
-                </div>
-                <p style="text-align: right;color: #9caebf;margin-right: 6px;cursor:pointer;">
-                  <a target="_blank" href="http://www.baidu.com" style="color: #9caebf;">查看详情</a>
-                </p>
-            </div>
-          </div>
+          </transition-group>
         </section>
-      </Col>
-    </Row>
+      </ICol>
+    </IRow>
   </div>
 </template>
 <style>
@@ -34,9 +46,12 @@
 </style>
 
 <script>
+import { Row, Col } from 'iview/src/components/grid';
 export default {
   name: "WorksContent",
   data: () => ({
+    showBigImg: false,
+    imgSrc: '',
     value2: [20, 50],
     works: [
       {"title" : "斑马学堂app", "content": "机器人编程课课堂辅助工具，功能主要有注册、二维码登录、现场分组、组员管理、组员签到、拍照、画图、作品标签系统、单人及组队报告编辑系统、生成报告等。", "time": "2017-10-08", "src": "", "imglist": []},
@@ -44,7 +59,9 @@ export default {
       {"title" : "达奇漂流工具微信版", "content": "微信端达奇互助交换系统，实现在线选购，微信支付，填单申请等功能。", "time": "2017-05-15", "src": "", "imglist": []},
       {"title" : "斑马小镇教育版", "content": "斑马小镇教育版pc站，实现课程播放、小组管理、同学管理、班级动态通知、作品评分。", "time": "2017-03-22", "src": "", "imglist": []},
       {"title" : "闪电刷新管家端", "content": "闪电刷新管家端，主要功能有上门预约、材料添加、报价单、施工管理、基检信息展示等使用功能。", "time": "2017-01-5", "src": "", "imglist": []},
-      {"title" : "闪电刷新小程序", "content": "闪电刷新微信用户端，实现报价计算、电话预约、案例查询、定位展示周边案例等功能。", "time": "2016-12-12", "src": "", "imglist": []},
+      {"title" : "闪电刷新小程序", "content": "闪电刷新微信用户端，实现报价计算、电话预约、案例查询、定位展示周边案例等功能。", "time": "2016-12-12", "src": "", "imglist": [
+        'http://ozynkcxdv.bkt.clouddn.com/%E5%B0%8F%E7%A8%8B%E5%BA%8F1.jpg','http://ozynkcxdv.bkt.clouddn.com/%E5%B0%8F%E7%A8%8B%E5%BA%8F2.jpg','http://ozynkcxdv.bkt.clouddn.com/%E5%B0%8F%E7%A8%8B%E5%BA%8F3.jpg'
+      ]},
       {"title" : "闪电刷新工友端", "content": "闪电刷新装修工友使用，实现工单派送、工单通知、节点拍照审核、确认工单、邀请工友、通过时间节点筛选工人、工人本地组队等功能。", "time": "2016-06-18", "src": "", "imglist": []},
       {"title" : "闪电刷新移动站", "content": "闪电刷新移动版网站，实现一键预约、装修报价器、轮播图等功能。", "time": "2016-02-12", "src": "", "imglist": []},
       {"title" : "汇乐家居pc站", "content": "汇乐家居pc站，实现一键预约、设计、主材、施工、一步到位，专业的互联网家装站。", "time": "2015-10-03", "src": "", "imglist": []},
@@ -54,29 +71,51 @@ export default {
     ]
   }),
   mounted: function() {
-    //热门文章列表
-    this.getHotArticle();
-    //请求文章分类列表
-    this.getArticleCategory();
+    
   },
   methods: {
-    getHotArticle: function() {
-      this.axios.get(this.web_api_url + "recommendedPosts").then(res => {
-        this.recommendedPosts = res.data;
-      });
+    // clickImg(e) {
+    //   this.showBigImg = true;
+    //   this.imgSrc = e.currentTarget.src;
+    // },
+    // viewBigImg() {
+    //   this.showBigImg = false;
+    // }
+    enter: function(el, done) {
+      Velocity(
+        el,
+        "transition.slideDownBigIn",
+        { duration: 750, stagger: 250 },
+        done
+      );
     },
-    getArticleCategory: function() {
-      this.axios.get(this.web_api_url + "categories").then(res => {
-        this.categories = res.data;
-      });
+    leave: function(el, done) {
+      Velocity(
+        el,
+        "transition.slideDownBigOut",
+        { duration: 750, stagger: 250 },
+        done
+      );
+    },
+    beforeAppear: function(el) {
+      el.style.display = "none";
+    },
+    appear: function(el, done) {
+      Velocity(
+        el,
+        "transition.slideDownBigIn",
+        { duration: 750, delay: 800, stagger: 250 },
+        done
+      );
     }
   },
   computed: {
-    setArticle() {
-      return this.$store.state.article.title;
-    }
+    
   },
-  components: {}
+  components: {
+    // 'big-img': ImgPreview
+    "IRow": Row, "ICol": Col,
+  }
 };
 </script>
 <style scoped>

@@ -1,30 +1,53 @@
 <template>
   <div class="content">
-    
-    <Row class="works-layout" type="flex" justify="space-between">
-      
-      <Col span="24" style="margin-top: 20px;">
+    <IRow class="works-layout" type="flex" justify="space-between">
+      <ICol span="24" style="margin-top: 20px;">
         <div class="charts">
-          <div class="charts-tree">
-            <h2 style="text-align: left;">关键词</h2>
-            <div id="chartLine" style="width:1180px; height:300px;"></div>
-          </div>
-          <div class="charts-tree">
-            <h2 style="text-align: left;">技能拓扑树</h2>
-            <div id="chartBar" style="width:1020px;height:600px;"></div>
-          </div>
-          <div class="charts-tree">
-            <h2 style="text-align: left;">职业履历表</h2>
-            <div id="chartColumn" style="height:500px;display: flex;align-items:center;justify-content:center;"></div>
-          </div>
+          <transition
+            appear 
+            v-on:enter="enter"
+            v-on:leave="leave"
+            v-on:before-appear="beforeAppear"
+            v-on:appear="appear"
+            :css="false">
+            <div class="charts-tree">
+              <h2 style="text-align: left;">关键词</h2>
+              <div id="chartLine" style="width:1180px; height:300px;"></div>
+            </div>
+          </transition>
+          <transition
+            appear 
+            v-on:enter="enter"
+            v-on:leave="leave"
+            v-on:before-appear="beforeAppear"
+            v-on:appear="appear"
+            :css="false">
+            <div class="charts-tree">
+              <h2 style="text-align: left;">技能拓扑树</h2>
+              <div id="chartBar" style="width:1020px;height:600px;"></div>
+            </div>
+          </transition>
+          <!-- <transition
+            appear 
+            v-on:enter="enter"
+            v-on:leave="leave"
+            v-on:before-appear="beforeAppear"
+            v-on:appear="appear"
+            :css="false"> -->
+            <div class="charts-tree">
+              <h2 style="text-align: left;">职业履历表</h2>
+              <div id="chartColumn" style="height:500px;width:1100px;display: flex;align-items:center;justify-content:center;"></div>
+            </div>
+          <!-- </transition> -->
         </div>
-      </Col>
-    </Row>
+      </ICol>
+    </IRow>
   </div>
 </template>
 <script>
 import echarts from "echarts";
 import wordCloud from "echarts-wordcloud";
+import { Row, Col } from 'iview/src/components/grid';
 export default {
   name: "MeContent",
   data: () => ({
@@ -882,10 +905,37 @@ export default {
     });
   },
   methods: {
-    resizeCharts: function() {}
+    resizeCharts: function() {},
+    enter: function(el, done) {
+      Velocity(
+        el,
+        "transition.slideDownBigIn",
+        { duration: 750, stagger: 250 },
+        done
+      );
+    },
+    leave: function(el, done) {
+      Velocity(
+        el,
+        "transition.slideDownBigOut",
+        { duration: 750, stagger: 250 },
+        done
+      );
+    },
+    beforeAppear: function(el) {
+      el.style.display = "none";
+    },
+    appear: function(el, done) {
+      Velocity(
+        el,
+        "transition.slideDownBigIn",
+        { duration: 750, delay: 800, stagger: 250 },
+        done
+      );
+    }
   },
   computed: {},
-  components: {}
+  components: {"IRow": Row, "ICol": Col}
 };
 </script>
 <style scoped>

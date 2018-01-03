@@ -6,37 +6,46 @@
     v-on:before-appear="beforeAppear"
     v-on:appear="appear"
     :css="false">
-  <div class="content">
-   <div class="article-title">
-    <h4>{{article.title}}</h4>
-   </div>
-   <IRow type="flex" justify="center" style="color:#666;">
-    <ICol span="3" class="article-title-col">
-      <Icon type="ios-calendar-outline" size="16px" />
-      <span style="margin-left: 5px;font-size: 14px;;">{{article.created_at | timeFormat}}</span>
-    </ICol>
-    <ICol span="3" class="article-title-col">
-      <Icon type="ios-folder-outline" size="16px" />
-      <span style="margin-left: 5px;font-size: 14px;">{{category.name}}</span>
-    </ICol>
-    <ICol span="2">
-      <Icon type="ios-eye-outline" size="16px" />
-      <span style="margin-left: 5px;font-size: 14px;">{{article.view_count}}</span>
-    </ICol>
-   </IRow>
-   <!-- <mavon-editor class="mavon-editor" v-model:default_open="default_open" v-model="article.content" :subfield="false" :toolbarsFlag="false" :editable="false" :ishljs="true" @save="saveArticleData" @htmlcode="htmlcode" style="height: 100%;"></mavon-editor> -->
-   <mavon-editor class="mavon-editor" default_open="preview" v-bind:value="article.content" :subfield="false" :toolbarsFlag="false" :editable="false" v-bind:ishljs="true" @save="saveArticleData" @htmlcode="htmlcode" code_style="code-github" style="height: 100%;"></mavon-editor>
-  </div>
+    <div class="content">
+      <ul>
+        <li class="inputItem">
+          <h3 class="inputTitle">文章标题</h3>
+          <IInput :value.sync="value" placeholder="请输入文章标题"></IInput>  
+        </li>
+        <li class="inputItem">
+          <h3 class="inputTitle">文章描述</h3>
+          <IInput :value.sync="value" type="textarea" placeholder="请输入文章标题"></IInput>  
+        </li>
+        <li class="inputItem">
+          <h3 class="inputTitle">文章slug</h3>
+          <IInput :value.sync="value" placeholder="请输入文章标题"></IInput>  
+        </li>
+        <li class="inputItem">
+          <h3 class="inputTitle">文章分类</h3>
+          <i-select :model.sync="model1" style="width:200px">
+            <i-option v-for="item in cityList" :value="item.value">{{ item.label }}</i-option>
+        </i-select>
+        </li>
+        <li class="inputItem">
+          <h3 class="inputTitle">文章标签</h3>
+          <IInput :value.sync="value" placeholder=""></IInput>  
+        </li>
+        <li class="inputItem">
+          <h3 class="inputTitle">文章内容</h3>
+          <mavon-editor class="mavon-editor" default_open="eidt" v-bind:value="article.content" :subfield="false" :toolbarsFlag="true" :editable="true" v-bind:ishljs="true" @save="saveArticleData" @htmlcode="htmlcode" code_style="code-github" style="height: 100%;"></mavon-editor>
+        </li>
+      </ul>
+    </div>
   </transition>
 </template>
 <script>
  //引入markdown编辑文件
 import { mavonEditor } from 'mavon-editor'
-import 'mavon-editor/dist/css/index.css'
-import Icon from 'iview/src/components/icon';
+import 'mavon-editor/dist/css/index.css';
+import { Input, Icon } from 'iview';
 import { Row, Col } from 'iview/src/components/grid';
 export default {
-  name: "Article",
+  name: "ArticleEdit",
   data: () => ({
     default_open: 'preview',
     article: '',
@@ -121,7 +130,7 @@ export default {
     crumbs.pop();
     this.$store.commit('setCrumbs', crumbs);
   },
-  components: {'mavon-editor': mavonEditor, "Icon": Icon, "IRow": Row, "ICol": Col,},
+  components: {'mavon-editor': mavonEditor, "Icon": Icon, "IRow": Row, "ICol": Col, "IInput": Input},
 };
 </script>
 
@@ -132,11 +141,12 @@ export default {
     background-color: #fff;
     margin: 20px 0 0 20px;
   }
-  .article-title {
-    font-size: 18px;
-    margin: 25px 25px 10px;
-    padding: 20px 0 20px;
-    border-bottom: 1px solid rgba(238,238,238,.5);
+  .inputItem{
+    text-align: left;
+    padding: 10px 15px 0;
+  }
+  .inputTitle{
+    margin-bottom: 5px;
   }
   .mavon-editor{
     box-shadow: none;
