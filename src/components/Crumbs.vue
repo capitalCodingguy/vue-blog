@@ -5,6 +5,7 @@
         <IBreadcrumbItem href="">燕子梁筑</IBreadcrumbItem>
         <IBreadcrumbItem v-bind:href="crumb.url" v-for="(crumb, key, index) in setCrumbs" v-bind:key="key" v-if="crumb.title">{{crumb.title}}</IBreadcrumbItem>
       </IBreadcrumb>
+
     </div>
   </div>
 </template>
@@ -54,7 +55,7 @@ export default {
     /* align-items: center; */
     position: fixed;
     top: 62px;
-    z-index: 10000;
+    z-index: 10;
   }
   .layout-breadcrumb{
     width: 1180px;

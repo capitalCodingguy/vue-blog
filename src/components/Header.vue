@@ -36,8 +36,19 @@
       </ICol> 
       <ICol span="3" style="text-align: right;">
         <div class="demo-avatar">
-          <IAvatar src="http://ozynkcxdv.bkt.clouddn.com/wy.png" size="large" />
-          <span style="margin-left: 5px;">帝都燕子梁</span>
+          <IAvatar :src="avatar" size="large" />
+          <Dropdown v-if="auth" placement="bottom-end" @on-click="exitLogin">
+            <a class="login-text" href="javascript:void(0)">
+              {{userName}}
+              <IIcon class="login-text" type="arrow-down-b"></IIcon>
+            </a>
+            <Dropdown-menu @click="exitLogin" slot="list">
+                <Dropdown-item name="1">个人中心</Dropdown-item>
+                <Dropdown-item name="2" on-click="exitLogin">退出登录</Dropdown-item>
+              </Dropdown-menu> 
+          </Dropdown>
+          <span class="login-text" v-if="!auth" @click="goToLogin">登录</span>
+          <span class="login-text" v-if="!auth" @click="goToRegister">注册</span>
         </div>
       </ICol>
     </IRow>
@@ -50,13 +61,16 @@
 </style>
 
 <script>
-import { Avatar, Icon, Input } from 'iview';
+import { Avatar, Icon, Input, Dropdown } from 'iview';
 import { Row, Col } from 'iview/src/components/grid';
 import IviewMenu from 'iview/src/components/menu';
 export default {
   name: "Header",
   data: () => ({
-    name: 'blog'
+    name: 'blog',
+    userName: '',
+    auth: false,
+    avatar: 'http://ozynkcxdv.bkt.clouddn.com/wy.png'
   }),
   methods: { 
     selectChange: function(name){
@@ -78,19 +92,55 @@ export default {
           this.$router.push({name: 'me'})
           this.$store.commit('setCrumbs', [{url: '/me/', title: '关于我'}]);
       }
+    },
+    goToLogin: function() {
+      this.$router.push({name: 'login'})
+      this.$store.commit('setCrumbs', [{url: '/login/', title: '登录'}])
+    },
+    goToRegister: function() {
+      this.$router.push({name: 'register'})
+      this.$store.commit('setCrumbs', [{url: '/register/', title: '注册'}])
+    },
+    getCurrentUserInfo: function() {
+      let token = localStorage.getItem('token');
+      if(token){
+        this.$store.dispatch('logined', token)
+      }else{
+        this.$router.push({name: 'login'})
+      }
+    },
+    exitLogin: function(val) {
+      switch (val) {
+        case '1':
+        break;
+        case '2':
+        console.log(val);
+        this.$store.dispatch('logout');
+        break;
+      }
     }
   },
-  // computed: {
-  //   getCurrentName(){
-  //     return this.$store.state.crumbs;
-  //   }
-  // },
-  // watch: {
-  //   getCurrentName() {
-  //     this.name = this.$store.state.crumbs[0]['url'];
-  //   }
-  // },
-  components: {"IMenu": IviewMenu, "IMenuItem": IviewMenu.Item, "IIcon": Icon, "IRow": Row, "ICol": Col, "IInput": Input, "IAvatar": Avatar}
+  mounted: function() {
+    // 请求用户信息
+    this.getCurrentUserInfo();
+  },
+  computed: {
+    getCurrentUser(){
+      return this.$store.state.avatar;
+    }
+  },
+  watch: {
+    getCurrentUser() {
+      this.auth = this.$store.state.auth;
+      this.avatar = this.$store.state.avatar;
+      this.userName = this.$store.state.name;
+    }
+  },
+  components: {
+    "IMenu": IviewMenu, "IMenuItem": IviewMenu.Item, "IIcon": Icon, 
+    "IRow": Row, "ICol": Col, "IInput": Input, "IAvatar": Avatar,
+    "Dropdown": Dropdown, "Dropdown-menu": Dropdown.Menu, "Dropdown-item": Dropdown.Item
+  }
 };
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -156,5 +206,10 @@ export default {
 }
 .ivu-menu-horizontal.ivu-menu-light:after {
   width: 0;
+}
+.header .login-text {
+  color: #495060;
+  cursor: pointer;
+  margin-left: 5px;
 }
 </style>

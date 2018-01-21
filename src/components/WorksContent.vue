@@ -54,10 +54,14 @@ export default {
     imgSrc: '',
     value2: [20, 50],
     works: [
-      {"title" : "斑马学堂app", "content": "机器人编程课课堂辅助工具，功能主要有注册、二维码登录、现场分组、组员管理、组员签到、拍照、画图、作品标签系统、单人及组队报告编辑系统、生成报告等。", "time": "2017-10-08", "src": "", "imglist": []},
+      {"title" : "斑马学堂app", "content": "机器人编程课课堂辅助工具，功能主要有注册、二维码登录、现场分组、组员管理、组员签到、拍照、画图、作品标签系统、单人及组队报告编辑系统、生成报告等。", "time": "2017-10-08", "src": "", "imglist": [
+        'http://ozynkcxdv.bkt.clouddn.com/app0.png','http://ozynkcxdv.bkt.clouddn.com/app1.png','http://ozynkcxdv.bkt.clouddn.com/app2.png'
+      ]},
       {"title" : "央视动画编辑器", "content": "央视少儿app合作项目，动漫人物场景录制系统。使用html5游戏框架egret制作，实现动漫人物故事的编辑、录制、播放、保存等功能。", "time": "2017-07-12", "src": "", "imglist": []},
       {"title" : "达奇漂流工具微信版", "content": "微信端达奇互助交换系统，实现在线选购，微信支付，填单申请等功能。", "time": "2017-05-15", "src": "", "imglist": []},
-      {"title" : "斑马小镇教育版", "content": "斑马小镇教育版pc站，实现课程播放、小组管理、同学管理、班级动态通知、作品评分。", "time": "2017-03-22", "src": "", "imglist": []},
+      {"title" : "斑马小镇教育版", "content": "斑马小镇教育版pc站，实现课程播放、小组管理、同学管理、班级动态通知、作品评分。", "time": "2017-03-22", "src": "", "imglist": [
+        'http://ozynkcxdv.bkt.clouddn.com/student1.png'
+      ]},
       {"title" : "闪电刷新管家端", "content": "闪电刷新管家端，主要功能有上门预约、材料添加、报价单、施工管理、基检信息展示等使用功能。", "time": "2017-01-5", "src": "", "imglist": []},
       {"title" : "闪电刷新小程序", "content": "闪电刷新微信用户端，实现报价计算、电话预约、案例查询、定位展示周边案例等功能。", "time": "2016-12-12", "src": "", "imglist": [
         'http://ozynkcxdv.bkt.clouddn.com/%E5%B0%8F%E7%A8%8B%E5%BA%8F1.jpg','http://ozynkcxdv.bkt.clouddn.com/%E5%B0%8F%E7%A8%8B%E5%BA%8F2.jpg','http://ozynkcxdv.bkt.clouddn.com/%E5%B0%8F%E7%A8%8B%E5%BA%8F3.jpg'

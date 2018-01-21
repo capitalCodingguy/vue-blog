@@ -64,7 +64,7 @@ export default {
   methods: {
     getArticleData: function() {
       this.articleId = this.$route.params.articleId;
-      this.axios.get(this.web_api_url + 'blog/' + this.$route.params.articleId).then((res) => {
+      this.axios.get('blog/' + this.$route.params.articleId).then((res) => {
         this.article = res.data;
         this.category = res.data.category;
         //更新面包屑导航数据

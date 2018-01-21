@@ -30,6 +30,7 @@
           <div class="card-foot">
             <Icon type="ios-pricetags-outline" size="30px" />
             <IButton type="ghost" shape="circle" size="small" class="article-tag" v-for="(tag,key,index) in post.tags" v-bind:key="tag.id">{{tag.name}}</IButton>
+            <span class="click-read" @click="goArticlePage(post.id)">点击阅读</span>
           </div>
         </Card>
       </transition>
@@ -75,7 +76,7 @@ export default {
     getBlogList: function() {
       this.blogListUrl = this.$store.state.blogListUrl;
       this.axios
-        .get(this.web_api_url + this.blogListUrl + "?page=" + this.limit)
+        .get(this.blogListUrl + "?page=" + this.limit)
         .then(res => {
           this.total = res.data.total;
           this.posts = res.data.data;
@@ -174,6 +175,9 @@ export default {
   margin-top: 20px;
   padding-bottom: 0;
 }
+.my-card:hover .click-read {
+  display: block;
+}
 .article-title {
   margin-bottom: 5px;
 }
@@ -196,5 +200,16 @@ export default {
 }
 .article-tag {
   margin-left: 8px;
+}
+.click-read {
+  display: none;
+  color: #2c3e50;
+  float: right;
+  font-size: 13px;
+  opacity: 0.8;
+  cursor: pointer;
+}
+.click-read:hover{
+  text-decoration:underline;
 }
 </style>

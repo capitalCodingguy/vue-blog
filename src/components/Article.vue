@@ -24,8 +24,8 @@
       <span style="margin-left: 5px;font-size: 14px;">{{article.view_count}}</span>
     </ICol>
    </IRow>
-   <!-- <mavon-editor class="mavon-editor" v-model:default_open="default_open" v-model="article.content" :subfield="false" :toolbarsFlag="false" :editable="false" :ishljs="true" @save="saveArticleData" @htmlcode="htmlcode" style="height: 100%;"></mavon-editor> -->
-   <mavon-editor class="mavon-editor" default_open="preview" v-bind:value="article.content" :subfield="false" :toolbarsFlag="false" :editable="false" v-bind:ishljs="true" @save="saveArticleData" @htmlcode="htmlcode" code_style="code-github" style="height: 100%;"></mavon-editor>
+   <!-- <mavon-editor class="mavon-editor" v-model:default_open="default_open" v-model="article.content" :subfield="true" :toolbarsFlag="true" :editable="true" :ishljs="true" @save="saveArticleData" @htmlcode="htmlcode" style="height: 100%;"></mavon-editor> -->
+   <mavon-editor class="mavon-editor" default_open="preview" v-bind:value="article.content" :subfield="false" :toolbarsFlag="false" :editable="false" @save="saveArticleData" @htmlcode="htmlcode" code_style="vs" v-bind:ishljs="false" style="height: 100%;"></mavon-editor>
   </div>
   </transition>
 </template>
@@ -55,7 +55,7 @@ export default {
   methods: {
     getArticleData: function() {
       this.articleId = this.$route.params.articleId;
-      this.axios.get(this.web_api_url + 'blog/' + this.$route.params.articleId).then((res) => {
+      this.axios.get('blog/' + this.$route.params.articleId).then((res) => {
         this.article = res.data;
         this.category = res.data.category;
         //更新面包屑导航数据

@@ -86,7 +86,7 @@ import { Row, Col } from "iview/src/components/grid";
 export default {
   name: "BlogContent",
   data: () => ({
-    tags: [],
+    tags: [], 
     tagName: "",
     categories: [],
     currentCateId: "",
@@ -104,17 +104,17 @@ export default {
   },
   methods: {
     getHotArticle: function() {
-      this.axios.get(this.web_api_url + "recommendedPosts").then(res => {
+      this.axios.get("recommendedPosts").then(res => {
         this.recommendedPosts = res.data;
       });
     },
     getArticleCategory: function() {
-      this.axios.get(this.web_api_url + "categories").then(res => {
+      this.axios.get("categories").then(res => {
         this.categories = res.data;
       });
     },
     getTags: function() {
-      this.axios.get(this.web_api_url + "tag").then(res => {
+      this.axios.get("tag").then(res => {
         this.tags = res.data;
       });
     },

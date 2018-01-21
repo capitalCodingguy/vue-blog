@@ -14,6 +14,7 @@ const WorksContent = resolve => require(['../components/WorksContent.vue'], reso
 const ResumeContent = resolve => require(['../components/ResumeContent.vue'], resolve);
 const MeContent = resolve => require(['../components/MeContent.vue'], resolve);
 const LoginContent = resolve => require(['../components/LoginContent.vue'], resolve);
+const RegisterContent = resolve => require(['../components/RegisterContent.vue'], resolve);
 const Article = resolve => require(['../components/Article.vue'], resolve);
 const ArticleEdit = resolve => require(['../components/ArticleEdit.vue'], resolve);
 Vue.use(Router)
@@ -71,7 +72,12 @@ export default new Router({
         {
           name: 'login',
           path: '/login/',
-          component: LoginContent,
+          component: LoginContent
+        },
+        {
+          name: 'register',
+          path: '/register/',
+          component: RegisterContent
         }
       ]
     }
