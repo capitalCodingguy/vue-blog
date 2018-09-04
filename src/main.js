@@ -30,6 +30,7 @@ new Vue({
   render: h => h(App),
   store: store,
   created() {
+    console.log(this.axios);
     this.axios.defaults.baseURL = 'http://blog.test/api/';
     // this.axios.defaults.baseURL = 'http://api.swallowfly.cn/api/';
     // 自定义的 axios 响应拦截器

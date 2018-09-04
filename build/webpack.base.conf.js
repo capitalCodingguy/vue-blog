@@ -13,6 +13,10 @@ module.exports = {
   entry: {
     app: './src/main.js'
   },
+  // externals: {
+  //   "echarts": "echarts",
+  //   "wordCloud": "wordCloud"
+  // },
   output: {
     path: config.build.assetsRoot,
     filename: config.dev?'[name].js':'[name].js?[chunkhash]',
